@@ -1,0 +1,8 @@
+F:\Andy's Dokumente\Spider\Spider\bin\Debug\Spider.exe
+F:\Andy's Dokumente\Spider\Spider\bin\Debug\Spider.pdb
+F:\Andy's Dokumente\Spider\Spider\obj\Debug\Spider.csprojResolveAssemblyReference.cache
+F:\Andy's Dokumente\Spider\Spider\obj\Debug\Spider.frmMain.resources
+F:\Andy's Dokumente\Spider\Spider\obj\Debug\Spider.Properties.Resources.resources
+F:\Andy's Dokumente\Spider\Spider\obj\Debug\Spider.csproj.GenerateResource.Cache
+F:\Andy's Dokumente\Spider\Spider\obj\Debug\Spider.exe
+F:\Andy's Dokumente\Spider\Spider\obj\Debug\Spider.pdb
