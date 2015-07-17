@@ -6,3 +6,11 @@ F:\Andy's Dokumente\Spider\Spider\obj\Debug\Spider.Properties.Resources.resource
 F:\Andy's Dokumente\Spider\Spider\obj\Debug\Spider.csproj.GenerateResource.Cache
 F:\Andy's Dokumente\Spider\Spider\obj\Debug\Spider.exe
 F:\Andy's Dokumente\Spider\Spider\obj\Debug\Spider.pdb
+E:\Spider\Spider\obj\Debug\Spider.exe
+E:\Spider\Spider\obj\Debug\Spider.pdb
+E:\Spider\Spider\obj\Debug\Spider.csprojResolveAssemblyReference.cache
+E:\Spider\Spider\obj\Debug\Spider.frmMain.resources
+E:\Spider\Spider\obj\Debug\Spider.Properties.Resources.resources
+E:\Spider\Spider\obj\Debug\Spider.csproj.GenerateResource.Cache
+E:\Spider\Spider\bin\Debug\Spider.exe
+E:\Spider\Spider\bin\Debug\Spider.pdb

@@ -13,6 +13,18 @@ namespace Spider
     {
         private Class.ExtendendList<Class.Structure> mStructures;
         private Class.Structure oldOne;
+        private int _newCards = 5;
+        private bool endOfGame;
+
+        public int newCards
+        {
+            get { return _newCards; }
+            set
+            {
+                _newCards = value;
+                this.lblCards.Text = (value == 0 ? "Sie haben keine Stapel mehr" : String.Format("Sie haben noch {0} Stapel", value));
+            }
+        }
 
         public frmMain()
         {
@@ -145,6 +157,15 @@ namespace Spider
                             s.lstCards[s.lstCards.Count - 1].Active = true;
                 }
             }
+            bool gameend = false;
+            foreach (Class.Structure current in this.mStructures)
+            {
+                gameend = (current.lstCards.Count == 0);
+                if (!gameend)
+                    break;
+            }
+            this.endOfGame = gameend;
+            this.Invalidate();
             // ---------------------------------------------------------------------------------------
         }
 
@@ -201,14 +222,24 @@ namespace Spider
                 }
                 i++;
             }
+            if (this.endOfGame)
+                e.Graphics.DrawString("Sie haben gewonnen!", new Font("Segoe UI", 36, FontStyle.Regular), new SolidBrush(Color.White), this.DisplayRectangle, new StringFormat() { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             bool succcess = Class.Structure.DistributeNewCars(this.mStructures);
             if (!succcess)
+            {
                 if (Class.Structure.OtherCards.Count != 0)
                     MessageBox.Show("Bitte erst die Karten auf die leeren Felder verteilen!");
+            }
+            else
+                newCards--;
+
+            if (newCards < 0)
+                newCards = 0;
+
             this.Invalidate();
         }
 
