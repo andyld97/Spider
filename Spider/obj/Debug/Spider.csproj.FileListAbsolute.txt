@@ -14,3 +14,6 @@ E:\Spider\Spider\obj\Debug\Spider.Properties.Resources.resources
 E:\Spider\Spider\obj\Debug\Spider.csproj.GenerateResource.Cache
 E:\Spider\Spider\bin\Debug\Spider.exe
 E:\Spider\Spider\bin\Debug\Spider.pdb
+F:\Andy's Dokumente\Spider\Spider\bin\Debug\Serialization.dll
+F:\Andy's Dokumente\Spider\Spider\bin\Debug\Serialization.pdb
+F:\Andy's Dokumente\Spider\Spider\obj\Debug\Spider.frmSettings.resources

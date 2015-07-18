@@ -28,59 +28,93 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.lblCards = new System.Windows.Forms.Label();
+            this.mStrip = new System.Windows.Forms.MenuStrip();
+            this.spielToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.neuesSpielToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.einstellungenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.spielToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.neueKartenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tippToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mStrip.SuspendLayout();
             this.SuspendLayout();
             // 
-            // button1
+            // mStrip
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(1043, 381);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(105, 34);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Neue Karten";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.mStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.spielToolStripMenuItem,
+            this.spielToolStripMenuItem1});
+            this.mStrip.Location = new System.Drawing.Point(0, 0);
+            this.mStrip.Name = "mStrip";
+            this.mStrip.Size = new System.Drawing.Size(1283, 24);
+            this.mStrip.TabIndex = 3;
             // 
-            // button2
+            // spielToolStripMenuItem
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(985, 381);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(52, 34);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Tipp";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.spielToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.neuesSpielToolStripMenuItem,
+            this.einstellungenToolStripMenuItem});
+            this.spielToolStripMenuItem.Name = "spielToolStripMenuItem";
+            this.spielToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.spielToolStripMenuItem.Text = "Spider";
             // 
-            // lblCards
+            // neuesSpielToolStripMenuItem
             // 
-            this.lblCards.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCards.AutoSize = true;
-            this.lblCards.BackColor = System.Drawing.Color.Green;
-            this.lblCards.ForeColor = System.Drawing.Color.White;
-            this.lblCards.Location = new System.Drawing.Point(982, 363);
-            this.lblCards.Name = "lblCards";
-            this.lblCards.Size = new System.Drawing.Size(132, 15);
-            this.lblCards.TabIndex = 2;
-            this.lblCards.Text = "Sie haben noch 5 Stapel";
+            this.neuesSpielToolStripMenuItem.Image = global::Spider.Properties.Resources.Add;
+            this.neuesSpielToolStripMenuItem.Name = "neuesSpielToolStripMenuItem";
+            this.neuesSpielToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.neuesSpielToolStripMenuItem.Text = "Neues Spiel";
+            this.neuesSpielToolStripMenuItem.Click += new System.EventHandler(this.neuesSpielToolStripMenuItem_Click);
+            // 
+            // einstellungenToolStripMenuItem
+            // 
+            this.einstellungenToolStripMenuItem.Image = global::Spider.Properties.Resources.Settings;
+            this.einstellungenToolStripMenuItem.Name = "einstellungenToolStripMenuItem";
+            this.einstellungenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.einstellungenToolStripMenuItem.Text = "Einstellungen";
+            this.einstellungenToolStripMenuItem.Click += new System.EventHandler(this.einstellungenToolStripMenuItem_Click);
+            // 
+            // spielToolStripMenuItem1
+            // 
+            this.spielToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.neueKartenToolStripMenuItem,
+            this.tippToolStripMenuItem});
+            this.spielToolStripMenuItem1.Name = "spielToolStripMenuItem1";
+            this.spielToolStripMenuItem1.Size = new System.Drawing.Size(44, 20);
+            this.spielToolStripMenuItem1.Text = "Spiel";
+            // 
+            // neueKartenToolStripMenuItem
+            // 
+            this.neueKartenToolStripMenuItem.Image = global::Spider.Properties.Resources.Copy;
+            this.neueKartenToolStripMenuItem.Name = "neueKartenToolStripMenuItem";
+            this.neueKartenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.neueKartenToolStripMenuItem.Text = "Neue Karten";
+            this.neueKartenToolStripMenuItem.Click += new System.EventHandler(this.neueKartenToolStripMenuItem_Click);
+            // 
+            // tippToolStripMenuItem
+            // 
+            this.tippToolStripMenuItem.Image = global::Spider.Properties.Resources.About;
+            this.tippToolStripMenuItem.Name = "tippToolStripMenuItem";
+            this.tippToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.tippToolStripMenuItem.Text = "Tipp (Beta)";
+            this.tippToolStripMenuItem.Click += new System.EventHandler(this.tippToolStripMenuItem_Click);
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1160, 427);
-            this.Controls.Add(this.lblCards);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.BackgroundImage = global::Spider.Properties.Resources.Wood;
+            this.ClientSize = new System.Drawing.Size(1283, 427);
+            this.Controls.Add(this.mStrip);
+            this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MainMenuStrip = this.mStrip;
             this.Name = "frmMain";
             this.ShowIcon = false;
             this.Text = "Spider";
             this.Load += new System.EventHandler(this.frmMain_Load);
+            this.mStrip.ResumeLayout(false);
+            this.mStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -88,9 +122,13 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Label lblCards;
+        private System.Windows.Forms.MenuStrip mStrip;
+        private System.Windows.Forms.ToolStripMenuItem spielToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem neuesSpielToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem spielToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem neueKartenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tippToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem einstellungenToolStripMenuItem;
 
     }
 }

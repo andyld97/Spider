@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Spider
 {
@@ -15,6 +16,9 @@ namespace Spider
         private Class.Structure oldOne;
         private int _newCards = 5;
         private bool endOfGame;
+        private frmSettings instance = null;
+        private string filePath = Path.Combine(Application.StartupPath, "Settings.xml");
+        private Class.Save test = null;
 
         public int newCards
         {
@@ -22,7 +26,7 @@ namespace Spider
             set
             {
                 _newCards = value;
-                this.lblCards.Text = (value == 0 ? "Sie haben keine Stapel mehr" : String.Format("Sie haben noch {0} Stapel", value));
+                this.neueKartenToolStripMenuItem.Text = (value == 0 ? "Neue Karten (Sie haben keine Stapel mehr)" : String.Format("Neue Karten (Sie haben noch {0} Stapel)", value));
             }
         }
 
@@ -31,13 +35,39 @@ namespace Spider
             InitializeComponent();
             this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.ResizeRedraw | ControlStyles.OptimizedDoubleBuffer, true);
             this.UpdateStyles();
+            this.ReadSettings();
+        }
+
+        public void ReadSettings()
+        {
+            if (File.Exists(this.filePath))
+            {
+                Serialization.Serialization<Class.Save> s = new Serialization.Serialization<Class.Save>();
+                this.test = s.Read(this.filePath, Serialization.Serialization<Class.Save>.Typ.Normal);
+                try
+                {
+                    if (this.test.Background != string.Empty)
+                        this.BackgroundImage = Image.FromFile(this.test.Background);
+                    else
+                        this.BackgroundImage = Properties.Resources.Wood;
+                    this.Invalidate();
+                }
+                catch 
+                { }
+            }
+            else
+                this.test = new Class.Save();
+            Class.Structure.test = this.test;
         }
 
         private void frmMain_Load(object sender, EventArgs e)
         {
             mStructures = Class.Structure.CreateStructureList();
-            this.Width = 1500;
             this.Invalidate();
+
+            this.mStrip.BackColor = Color.FromArgb(200, 230, 100, 70);
+            this.mStrip.ForeColor = Color.Black;
+            this.newCards = 5;
         }
 
         protected override void OnMouseDown(MouseEventArgs e)
@@ -172,7 +202,7 @@ namespace Spider
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            e.Graphics.FillRectangle(new SolidBrush(Color.Green), this.DisplayRectangle);
+           // e.Graphics.FillRectangle(new SolidBrush(Color.Green), this.DisplayRectangle);
             StringFormat alginment = new StringFormat() { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Near };
             int i = 0, c = 0;
             foreach (Class.Structure mStr in this.mStructures)
@@ -183,39 +213,32 @@ namespace Spider
                 if (mStr.lstCards.Count == 0)
                 {
                     // Empty field
-                    e.Graphics.DrawRectangle(new Pen(Color.Violet), new Rectangle(i * 150, 10, 100, 150));
+                    e.Graphics.DrawRectangle(new Pen(Color.Violet), new Rectangle(i * (test.Distance + test.Width), test.Y + 10, 100, 150));
                     i++; // Because \/ there will be continued!!!!
                     continue;
                 }
 
                 foreach (Class.Cart mCart in mStr.lstCards)
                 {
-                    int x = i * 150;
-                    int y = 10 + (c * 10);
+                    int x = i * (test.Width + test.Distance);
+                    int y = test.Y + 10 + (c * 10);
                     if (!mCart.Active)
-                        e.Graphics.FillRectangle(new SolidBrush(Color.Red), new Rectangle(x, y, 100, 5));
+                        e.Graphics.FillRectangle(new SolidBrush(Color.Red), new Rectangle(x, y, test.Width, 5));
                     else
                     {
-                          Rectangle actCard;
-                          Font toDraw;
-                          if (mStr.lstCards.IndexOf(mCart) == mStr.lstCards.Count - 1)
-                          {   
-                              actCard = new Rectangle(i * 150, y + cCard * 50, 100, 150);
-                              int sZ = (mCart.ccType == Class.Cart.cType.Ten) ? 50 : 72;
-                              toDraw = new Font("Segoe UI", sZ, FontStyle.Regular);
-                          }
-                          else
-                          {                     
-                              actCard = new Rectangle(i * 150,  y + (cCard * 50), 100, 50);
-                              toDraw = new Font("Segoe UI", 20, FontStyle.Regular);
-                          }
-                        e.Graphics.FillRectangle(new SolidBrush(Color.Blue), actCard);
-                        e.Graphics.DrawString(Class.Cart.Convert(mCart.ccType), toDraw, new SolidBrush(Color.Black), actCard, alginment);
+                        Rectangle actCard;
+                        if (mStr.lstCards.IndexOf(mCart) == mStr.lstCards.Count - 1)
+                            actCard = new Rectangle(i * (test.Width + test.Distance), y + (cCard * test.Distance2), test.Width, test.Height);
+                        else
+                            actCard = new Rectangle(i * (test.Width + test.Distance), y + (cCard * test.Distance2), test.Width, test.Distance2 * 2);
+
+                        e.Graphics.DrawImageUnscaledAndClipped(mCart.ToImage(), actCard);
+
                         if (mCart.Selection)
-                            e.Graphics.DrawRectangle(new Pen(Color.Yellow), actCard);
+                            e.Graphics.DrawRectangle(new Pen(Color.Green, 3), actCard);
                         int fact = 3;
                         if (mCart.IsTipp)
-                            e.Graphics.DrawRectangle(new Pen(Color.Bisque, 1), new Rectangle( actCard.X + fact, actCard.Y + fact, actCard.Width - fact*2, actCard.Height - fact*2));
+                            e.Graphics.DrawRectangle(new Pen(Color.Blue, 1), new Rectangle(actCard.X + fact, actCard.Y + fact, actCard.Width - fact * 2, actCard.Height - fact * 2));
                         cCard++;
                     }
                     c++;
@@ -226,7 +249,24 @@ namespace Spider
                 e.Graphics.DrawString("Sie haben gewonnen!", new Font("Segoe UI", 36, FontStyle.Regular), new SolidBrush(Color.White), this.DisplayRectangle, new StringFormat() { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void neuesSpielToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show(this, "Sind Sie sich sicher, dass Sie das aktuelle Spiel abbrechen und ein neues Spiel starten möchten?", "Neues Spiel?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
+            {
+                mStructures = Class.Structure.CreateStructureList();
+                this.endOfGame = false;
+                this.newCards = 5;
+                this.Invalidate();
+            }
+        }
+
+        private void tippToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Class.Structure.ShowsAllTipps(this.mStructures);
+            this.Invalidate();
+        }
+
+        private void neueKartenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             bool succcess = Class.Structure.DistributeNewCars(this.mStructures);
             if (!succcess)
@@ -243,10 +283,15 @@ namespace Spider
             this.Invalidate();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void einstellungenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Class.Structure.ShowsAllTipps(this.mStructures);
-            this.Invalidate();
+            if (instance == null || instance.IsDisposed)
+            {
+                instance = new frmSettings(this);
+                instance.Show();
+            }
+            else
+                instance.BringToFront();
         }
     }
 }

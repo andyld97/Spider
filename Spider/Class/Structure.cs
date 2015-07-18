@@ -12,6 +12,7 @@ namespace Spider.Class
         public SType Type = SType.Default;
         public ExtendendList<Cart> lstCards;
         public static ExtendendList<Cart> OtherCards = new ExtendendList<Cart>();
+        public static Class.Save test = null;
 
         public enum SType
         {
@@ -68,8 +69,8 @@ namespace Spider.Class
 
         public static void SetState(Structure lst, bool state)
         {
-                foreach (Cart c in lst.lstCards)
-                    c.Selection = state;
+            foreach (Cart c in lst.lstCards)
+                c.Selection = state;
         }
 
         public static Info FindByLocation(ExtendendList<Structure> lst, Point p)
@@ -80,11 +81,10 @@ namespace Spider.Class
             {
                 c = 0;
                 int cCard = 0;
-                int y2 = 0;
                 Rectangle actCard;
                 if (mStr.lstCards.Count == 0)
                 {
-                    if (new Rectangle(i * 150, 10, 100, 150).Contains(p))
+                    if (new Rectangle(i * (test.Width + test.Distance), test.Y + 10, test.Width, test.Height).Contains(p))
                     {
                         toReturn.SelectedCart = null;
                         toReturn.CurrentStructure = mStr;
@@ -96,16 +96,16 @@ namespace Spider.Class
 
                 foreach (Class.Cart mCart in mStr.lstCards)
                 {
-                    int x = i * 150;
-                    int y = 10 + (c * 10);
+                    int x = i * (test.Width + test.Distance);
+                    int y = test.Y + (c * 10);
                     if (!mCart.Active)
-                        actCard = new Rectangle(x, y, 100, 5);
+                        actCard = new Rectangle(x, y, test.Width, 5);
                     else
                     {
                         if (mStr.lstCards.IndexOf(mCart) == mStr.lstCards.Count - 1)
-                            actCard = new Rectangle(i * 150, y + cCard * 50, 100, 150);
+                            actCard = new Rectangle(i * (test.Width + test.Distance), y + cCard * test.Distance2, test.Width, test.Height);
                         else
-                            actCard = new Rectangle(i * 150, y + (cCard * 50), 100, 50);
+                            actCard = new Rectangle(i * (test.Width + test.Distance), y + (cCard * test.Distance2), test.Width, test.Distance2 * 2);
                         cCard++;
                     }
                     c++;

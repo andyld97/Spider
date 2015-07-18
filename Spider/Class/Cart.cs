@@ -51,23 +51,26 @@ namespace Spider.Class
             return Structure.Abs(cTmp.IndexOf(one) - cTmp.IndexOf(two));
         }
 
-        public static string Convert(cType current)
+        public Image ToImage()
         {
-            switch (current)
+            switch (this.ccType)
             {
-                case cType.Default: return "-1"; break;
-                case cType.One: return "1"; break;
-                case cType.Two: return "2"; break;
-                case cType.Three: return "3"; break;
-                case cType.Four: return "4"; break;
-                case cType.Five: return "5"; break;
-                case cType.Six: return "6"; break;
-                case cType.Seven: return "7"; break;
-                case cType.Eight: return "8"; break;
-                case cType.Nine: return "9"; break;
-                case cType.Ten: return "10"; break;
+                case cType.Default: return null; break;
+                case cType.One: return Properties.Resources._1; break;
+                case cType.Two: return Properties.Resources._2; break;
+                case cType.Three: return Properties.Resources._3; break;
+                case cType.Four: return Properties.Resources._4; break;
+                case cType.Five: return Properties.Resources._5; break;
+                case cType.Six: return Properties.Resources._6; break;
+                case cType.Seven: return Properties.Resources._7; break;
+                case cType.Eight: return Properties.Resources._8; break;
+                case cType.Nine: return Properties.Resources._9; break;
+                case cType.Ten: return Properties.Resources._10; break;
+                case cType.K: return Properties.Resources.K; break;
+                case cType.Q: return Properties.Resources.Q; break;
+                case cType.J: return Properties.Resources.J; break;
             }
-            return current.ToString();
+            return null;
         }
 
         public static ExtendendList<Cart> CreateNewCarts()
