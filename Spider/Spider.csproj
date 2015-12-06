@@ -31,6 +31,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>1.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Serialization">
       <HintPath>..\..\..\Eigene Dateien\Desktop\UserInterface Projekt\UserInterface\UserInterface\bin\Debug\Serialization.dll</HintPath>
@@ -144,6 +147,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="1.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -61,7 +61,7 @@
             // 
             this.neuesSpielToolStripMenuItem.Image = global::Spider.Properties.Resources.Add;
             this.neuesSpielToolStripMenuItem.Name = "neuesSpielToolStripMenuItem";
-            this.neuesSpielToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.neuesSpielToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.neuesSpielToolStripMenuItem.Text = "Neues Spiel";
             this.neuesSpielToolStripMenuItem.Click += new System.EventHandler(this.neuesSpielToolStripMenuItem_Click);
             // 
@@ -69,7 +69,7 @@
             // 
             this.einstellungenToolStripMenuItem.Image = global::Spider.Properties.Resources.Settings;
             this.einstellungenToolStripMenuItem.Name = "einstellungenToolStripMenuItem";
-            this.einstellungenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.einstellungenToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.einstellungenToolStripMenuItem.Text = "Einstellungen";
             this.einstellungenToolStripMenuItem.Click += new System.EventHandler(this.einstellungenToolStripMenuItem_Click);
             // 
@@ -86,16 +86,16 @@
             // 
             this.neueKartenToolStripMenuItem.Image = global::Spider.Properties.Resources.Copy;
             this.neueKartenToolStripMenuItem.Name = "neueKartenToolStripMenuItem";
-            this.neueKartenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.neueKartenToolStripMenuItem.Text = "Neue Karten";
+            this.neueKartenToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.neueKartenToolStripMenuItem.Text = "Neue Karten (F2)";
             this.neueKartenToolStripMenuItem.Click += new System.EventHandler(this.neueKartenToolStripMenuItem_Click);
             // 
             // tippToolStripMenuItem
             // 
             this.tippToolStripMenuItem.Image = global::Spider.Properties.Resources.About;
             this.tippToolStripMenuItem.Name = "tippToolStripMenuItem";
-            this.tippToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.tippToolStripMenuItem.Text = "Tipp (Beta)";
+            this.tippToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.tippToolStripMenuItem.Text = "Tipp (F3) (Beta)";
             this.tippToolStripMenuItem.Click += new System.EventHandler(this.tippToolStripMenuItem_Click);
             // 
             // frmMain

@@ -105,6 +105,24 @@ namespace Spider.Class
                 tmp.Selection = state;
         }
 
+        public static bool CanMoveAllCards(ExtendendList<Cart> lst)
+        {
+            ExtendendList<Cart> activeCards = Cart.GetActiveCards(lst);
+            if (lst.Count == 1)
+                return true;
+
+            int diff = 0;
+            for (int s = 0; s <= lst.Count - 1; s++)
+            {
+                if (s + 1 > lst.Count - 1)
+                    return true;
+                diff = Cart.CalculateDifference(lst[s].ccType, lst[s + 1].ccType);
+                if (Structure.Abs(diff) != 1)
+                    return false;
+            }
+            return false;           
+        }
+
         public static void Shuffle<T>(ExtendendList<T> ilist)
         {
             int iIndex;

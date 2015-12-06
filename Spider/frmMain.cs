@@ -70,6 +70,16 @@ namespace Spider
             this.newCards = 5;
         }
 
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            base.OnKeyDown(e);
+            if (e.KeyCode == Keys.F2)
+                this.contributeNewCars();
+            else if (e.KeyCode == Keys.F3)
+                this.showHelp();
+        }
+
+
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseDown(e);
@@ -118,7 +128,10 @@ namespace Spider
                     }
                     if (!canGoOn)
                     {
-                        MessageBox.Show("Das funktioniert nicht!");
+                        System.Console.Beep();
+                        foreach (Class.Cart c in items)
+                            c.Selection = false;
+                        this.Invalidate();
                         return;
                     }
                     oldOne = null;  
@@ -148,16 +161,34 @@ namespace Spider
                     strM.SelectedCart.Selection = true;
                     oldOne = strM.CurrentStructure;
 
-                    // Select carts, which are under this cart
-                    int index = strM.CurrentStructure.lstCards.IndexOf(strM.SelectedCart);
-                    if (index != -1)
+                    bool tryFinding = Class.Cart.CanMoveAllCards(this.GetShouldSelectedCards(strM));
+                    if (!tryFinding && this.GetShouldSelectedCards(strM).Count == 0)
                     {
-                        for (int i = index + 1; i <= strM.CurrentStructure.lstCards.Count - 1; i++)
+                        Class.ExtendendList<Class.Cart> lstCards = new Class.ExtendendList<Class.Cart>();
+                        lstCards.Add(strM.SelectedCart);
+                        tryFinding = Class.Cart.CanMoveAllCards(lstCards);
+                    }
+
+                    if (tryFinding)
+                    {
+                        Class.ExtendendList<Class.Cart> shouldSelected = new Class.ExtendendList<Class.Cart>();
+                        // Select carts, which are under this cart
+                        int index = strM.CurrentStructure.lstCards.IndexOf(strM.SelectedCart);
+                        if (index != -1)
                         {
-                            Class.Cart current = strM.CurrentStructure.lstCards[i];
-                            current.Selection = true;
+                            for (int i = index + 1; i <= strM.CurrentStructure.lstCards.Count - 1; i++)
+                            {
+                                Class.Cart current = strM.CurrentStructure.lstCards[i];
+                                current.Selection = true;
+                            }
                         }
                     }
+                    else
+                    {
+                        strM.SelectedCart.Selection = false;
+                        Console.Beep();
+                    }
+
                     CheckForWin();
                     this.Invalidate();
           
@@ -165,6 +196,23 @@ namespace Spider
             }           
         }
 
+
+        public Class.ExtendendList<Class.Cart> GetShouldSelectedCards(Class.Structure.Info strM)
+        {
+            Class.ExtendendList<Class.Cart> shouldSelected = new Class.ExtendendList<Class.Cart>();
+            // Select carts, which are under this cart
+            int index = strM.CurrentStructure.lstCards.IndexOf(strM.SelectedCart);
+            if (index != -1)
+            {
+                for (int i = index; i <= strM.CurrentStructure.lstCards.Count - 1; i++)
+                {
+                    Class.Cart current = strM.CurrentStructure.lstCards[i];
+                    shouldSelected.Add(current);
+                }
+            }
+            return shouldSelected;
+        }
+  
         public void CheckForWin()
         {
             // Check for Winning here
@@ -197,6 +245,32 @@ namespace Spider
             this.endOfGame = gameend;
             this.Invalidate();
             // ---------------------------------------------------------------------------------------
+        }
+
+        private void contributeNewCars()
+        {
+            bool succcess = Class.Structure.DistributeNewCars(this.mStructures);
+            if (!succcess)
+            {
+                if (Class.Structure.OtherCards.Count != 0)
+                    MessageBox.Show(this, "Bitte erst die Karten auf die leeren Felder verteilen!", "Leere Felder sind unzulässig", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+                newCards--;
+
+            if (newCards < 0)
+            {
+                MessageBox.Show(this, "Sie haben keine Stapel mehr!", "Keine Stapel mehr vorhanden", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                newCards = 0;
+                this.Invalidate();
+            }
+            this.Invalidate();
+        }
+
+        private void showHelp()
+        {
+            Class.Structure.ShowsAllTipps(this.mStructures);
+            this.Invalidate();
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -262,25 +336,12 @@ namespace Spider
 
         private void tippToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Class.Structure.ShowsAllTipps(this.mStructures);
-            this.Invalidate();
+            this.showHelp();
         }
 
         private void neueKartenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            bool succcess = Class.Structure.DistributeNewCars(this.mStructures);
-            if (!succcess)
-            {
-                if (Class.Structure.OtherCards.Count != 0)
-                    MessageBox.Show("Bitte erst die Karten auf die leeren Felder verteilen!");
-            }
-            else
-                newCards--;
-
-            if (newCards < 0)
-                newCards = 0;
-
-            this.Invalidate();
+            this.contributeNewCars();
         }
 
         private void einstellungenToolStripMenuItem_Click(object sender, EventArgs e)
