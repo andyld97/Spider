@@ -31,7 +31,9 @@
             this.mStrip = new System.Windows.Forms.MenuStrip();
             this.spielToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.neuesSpielToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.speicherStrgSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.einstellungenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.spielLadenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.spielToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.neueKartenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tippToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,6 +54,8 @@
             // 
             this.spielToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.neuesSpielToolStripMenuItem,
+            this.speicherStrgSToolStripMenuItem,
+            this.spielLadenToolStripMenuItem,
             this.einstellungenToolStripMenuItem});
             this.spielToolStripMenuItem.Name = "spielToolStripMenuItem";
             this.spielToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
@@ -61,17 +65,33 @@
             // 
             this.neuesSpielToolStripMenuItem.Image = global::Spider.Properties.Resources.Add;
             this.neuesSpielToolStripMenuItem.Name = "neuesSpielToolStripMenuItem";
-            this.neuesSpielToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.neuesSpielToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.neuesSpielToolStripMenuItem.Text = "Neues Spiel";
             this.neuesSpielToolStripMenuItem.Click += new System.EventHandler(this.neuesSpielToolStripMenuItem_Click);
+            // 
+            // speicherStrgSToolStripMenuItem
+            // 
+            this.speicherStrgSToolStripMenuItem.Image = global::Spider.Properties.Resources.Save;
+            this.speicherStrgSToolStripMenuItem.Name = "speicherStrgSToolStripMenuItem";
+            this.speicherStrgSToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.speicherStrgSToolStripMenuItem.Text = "Speichern   (Strg+S)";
+            this.speicherStrgSToolStripMenuItem.Click += new System.EventHandler(this.speicherStrgSToolStripMenuItem_Click);
             // 
             // einstellungenToolStripMenuItem
             // 
             this.einstellungenToolStripMenuItem.Image = global::Spider.Properties.Resources.Settings;
             this.einstellungenToolStripMenuItem.Name = "einstellungenToolStripMenuItem";
-            this.einstellungenToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.einstellungenToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.einstellungenToolStripMenuItem.Text = "Einstellungen";
             this.einstellungenToolStripMenuItem.Click += new System.EventHandler(this.einstellungenToolStripMenuItem_Click);
+            // 
+            // spielLadenToolStripMenuItem
+            // 
+            this.spielLadenToolStripMenuItem.Image = global::Spider.Properties.Resources.Open;
+            this.spielLadenToolStripMenuItem.Name = "spielLadenToolStripMenuItem";
+            this.spielLadenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.spielLadenToolStripMenuItem.Text = "Spiel laden (Strg+O)";
+            this.spielLadenToolStripMenuItem.Click += new System.EventHandler(this.spielLadenToolStripMenuItem_Click);
             // 
             // spielToolStripMenuItem1
             // 
@@ -129,7 +149,8 @@
         private System.Windows.Forms.ToolStripMenuItem neueKartenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tippToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem einstellungenToolStripMenuItem;
-
+        private System.Windows.Forms.ToolStripMenuItem speicherStrgSToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem spielLadenToolStripMenuItem;
     }
 }
 

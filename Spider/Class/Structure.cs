@@ -7,11 +7,12 @@ using System.Windows.Forms;
 
 namespace Spider.Class
 {
+    [Serializable]
     public class Structure
     {
         public SType Type = SType.Default;
         public ExtendendList<Cart> lstCards;
-        public static ExtendendList<Cart> OtherCards = new ExtendendList<Cart>();
+       // public static ExtendendList<Cart> OtherCards = new ExtendendList<Cart>();
         public static Class.Save test = null;
 
         public enum SType
@@ -26,6 +27,9 @@ namespace Spider.Class
             this.lstCards = lstCards;
             this.Type = Type;
         }
+
+        public Structure()
+        { }
 
         public static bool GetState(ExtendendList<Structure> lst)
         {
@@ -121,6 +125,7 @@ namespace Spider.Class
             return toReturn;
         }
 
+        [Serializable]
         public struct Info
         {
             public Structure CurrentStructure;
@@ -222,7 +227,7 @@ namespace Spider.Class
            // return (value < 0) ? -value : value; (The new abs)
         }
 
-        public static ExtendendList<Structure> CreateStructureList()
+        public static ExtendendList<Structure> CreateStructureList(Game currentGame)
         {
             ExtendendList<Cart> mCarts = Class.Cart.CreateNewCarts();
             ExtendendList<Structure> mStructures = new ExtendendList<Class.Structure>();
@@ -237,7 +242,7 @@ namespace Spider.Class
                 for (int c = 0; c <= cCards - 1; c++)
                 {
                     Cart curCart = mCarts[index];
-                    curCart.owner = str;
+                  //  curCart.owner = str;
                     if (c == cCards - 1)
                         curCart.Active = true;
                     tmpLst.Add(curCart);
@@ -249,9 +254,9 @@ namespace Spider.Class
                 mStructures.Add(str);
             }
 
-            Structure.OtherCards.Clear();
+            currentGame.OtherCards.Clear();
             for (int c = ct; c <= mCarts.Count - 1; c++)
-                Structure.OtherCards.Add(mCarts[c]);
+                currentGame.OtherCards.Add(mCarts[c]);
             return mStructures;
         }
 
@@ -323,6 +328,7 @@ namespace Spider.Class
             return toReturn;             
         }
 
+        [Serializable]
         public struct Tipp
         {
             public ExtendendList<Cart> SelectedCards;
@@ -334,24 +340,24 @@ namespace Spider.Class
 
         }
 
-        public static bool DistributeNewCars(ExtendendList<Structure> tmpLst)
+        public static bool DistributeNewCars(ExtendendList<Structure> tmpLst, Game currentGame)
         {
             if (Structure.CanDistributeCards(tmpLst))
             {
-                if (Structure.OtherCards.Count != 0 && Structure.OtherCards.Count > 9)
+                if (currentGame.OtherCards.Count != 0 && currentGame.OtherCards.Count > 9)
                 {
                     int count = 0;
                     ExtendendList<Cart> saved = new ExtendendList<Cart>();
                     foreach (Structure str in tmpLst)
                     {
-                        Cart toAdd = Structure.OtherCards[count];
+                        Cart toAdd = currentGame.OtherCards[count];
                         saved.Add(toAdd);
                         toAdd.Active = true;
                         str.lstCards.Add(toAdd);
                         count++;
                     }
                     for (int i = 0; i <= count - 1; i++)
-                        Structure.OtherCards.Remove(saved[i]);
+                        currentGame.OtherCards.Remove(saved[i]);
                     Structure.SetState(tmpLst, false);
                 }
                 return true;

@@ -32,6 +32,16 @@
             this.txtBackground = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnStandard = new System.Windows.Forms.Button();
+            this.grpColors = new System.Windows.Forms.GroupBox();
+            this.pnlSelect = new System.Windows.Forms.Panel();
+            this.pnlNotActive = new System.Windows.Forms.Panel();
+            this.pnlTip = new System.Windows.Forms.Panel();
+            this.pnlFont = new System.Windows.Forms.Panel();
+            this.lnkSelect = new System.Windows.Forms.LinkLabel();
+            this.lnkNotActive = new System.Windows.Forms.LinkLabel();
+            this.lnkFont = new System.Windows.Forms.LinkLabel();
+            this.lnkTip = new System.Windows.Forms.LinkLabel();
+            this.grpColors.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnSearch
@@ -68,16 +78,110 @@
             this.btnStandard.Name = "btnStandard";
             this.btnStandard.Size = new System.Drawing.Size(172, 23);
             this.btnStandard.TabIndex = 3;
-            this.btnStandard.Text = "Standart verwenden";
+            this.btnStandard.Text = "Standard verwenden";
             this.btnStandard.UseVisualStyleBackColor = true;
             this.btnStandard.Click += new System.EventHandler(this.btnStandard_Click);
+            // 
+            // grpColors
+            // 
+            this.grpColors.Controls.Add(this.lnkTip);
+            this.grpColors.Controls.Add(this.lnkFont);
+            this.grpColors.Controls.Add(this.lnkNotActive);
+            this.grpColors.Controls.Add(this.lnkSelect);
+            this.grpColors.Controls.Add(this.pnlFont);
+            this.grpColors.Controls.Add(this.pnlTip);
+            this.grpColors.Controls.Add(this.pnlNotActive);
+            this.grpColors.Controls.Add(this.pnlSelect);
+            this.grpColors.Location = new System.Drawing.Point(12, 83);
+            this.grpColors.Name = "grpColors";
+            this.grpColors.Size = new System.Drawing.Size(308, 131);
+            this.grpColors.TabIndex = 4;
+            this.grpColors.TabStop = false;
+            this.grpColors.Text = "Farben";
+            // 
+            // pnlSelect
+            // 
+            this.pnlSelect.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlSelect.Location = new System.Drawing.Point(18, 22);
+            this.pnlSelect.Name = "pnlSelect";
+            this.pnlSelect.Size = new System.Drawing.Size(16, 16);
+            this.pnlSelect.TabIndex = 0;
+            // 
+            // pnlNotActive
+            // 
+            this.pnlNotActive.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlNotActive.Location = new System.Drawing.Point(18, 44);
+            this.pnlNotActive.Name = "pnlNotActive";
+            this.pnlNotActive.Size = new System.Drawing.Size(16, 16);
+            this.pnlNotActive.TabIndex = 1;
+            // 
+            // pnlTip
+            // 
+            this.pnlTip.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlTip.Location = new System.Drawing.Point(18, 66);
+            this.pnlTip.Name = "pnlTip";
+            this.pnlTip.Size = new System.Drawing.Size(16, 16);
+            this.pnlTip.TabIndex = 1;
+            // 
+            // pnlFont
+            // 
+            this.pnlFont.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlFont.Location = new System.Drawing.Point(18, 87);
+            this.pnlFont.Name = "pnlFont";
+            this.pnlFont.Size = new System.Drawing.Size(16, 16);
+            this.pnlFont.TabIndex = 1;
+            // 
+            // lnkSelect
+            // 
+            this.lnkSelect.AutoSize = true;
+            this.lnkSelect.Location = new System.Drawing.Point(40, 23);
+            this.lnkSelect.Name = "lnkSelect";
+            this.lnkSelect.Size = new System.Drawing.Size(136, 15);
+            this.lnkSelect.TabIndex = 2;
+            this.lnkSelect.TabStop = true;
+            this.lnkSelect.Text = "Auswahlfarbe der Karten";
+            this.lnkSelect.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkSelect_LinkClicked);
+            // 
+            // lnkNotActive
+            // 
+            this.lnkNotActive.AutoSize = true;
+            this.lnkNotActive.Location = new System.Drawing.Point(40, 45);
+            this.lnkNotActive.Name = "lnkNotActive";
+            this.lnkNotActive.Size = new System.Drawing.Size(171, 15);
+            this.lnkNotActive.TabIndex = 3;
+            this.lnkNotActive.TabStop = true;
+            this.lnkNotActive.Text = "Farbe der eingeklappten Karten";
+            this.lnkNotActive.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkNotActive_LinkClicked);
+            // 
+            // lnkFont
+            // 
+            this.lnkFont.AutoSize = true;
+            this.lnkFont.Location = new System.Drawing.Point(40, 87);
+            this.lnkFont.Name = "lnkFont";
+            this.lnkFont.Size = new System.Drawing.Size(68, 15);
+            this.lnkFont.TabIndex = 4;
+            this.lnkFont.TabStop = true;
+            this.lnkFont.Text = "Schriftfarbe";
+            this.lnkFont.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkFont_LinkClicked);
+            // 
+            // lnkTip
+            // 
+            this.lnkTip.AutoSize = true;
+            this.lnkTip.Location = new System.Drawing.Point(40, 67);
+            this.lnkTip.Name = "lnkTip";
+            this.lnkTip.Size = new System.Drawing.Size(88, 15);
+            this.lnkTip.TabIndex = 5;
+            this.lnkTip.TabStop = true;
+            this.lnkTip.Text = "Farbe der Tipps";
+            this.lnkTip.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkTip_LinkClicked);
             // 
             // frmSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(327, 84);
+            this.ClientSize = new System.Drawing.Size(331, 216);
+            this.Controls.Add(this.grpColors);
             this.Controls.Add(this.btnStandard);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtBackground);
@@ -90,6 +194,8 @@
             this.ShowIcon = false;
             this.Text = "Einstellungen";
             this.Load += new System.EventHandler(this.frmSettings_Load);
+            this.grpColors.ResumeLayout(false);
+            this.grpColors.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -101,5 +207,14 @@
         private System.Windows.Forms.TextBox txtBackground;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnStandard;
+        private System.Windows.Forms.GroupBox grpColors;
+        private System.Windows.Forms.LinkLabel lnkTip;
+        private System.Windows.Forms.LinkLabel lnkFont;
+        private System.Windows.Forms.LinkLabel lnkNotActive;
+        private System.Windows.Forms.LinkLabel lnkSelect;
+        private System.Windows.Forms.Panel pnlFont;
+        private System.Windows.Forms.Panel pnlTip;
+        private System.Windows.Forms.Panel pnlNotActive;
+        private System.Windows.Forms.Panel pnlSelect;
     }
 }

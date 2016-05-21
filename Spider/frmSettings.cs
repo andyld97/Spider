@@ -27,16 +27,29 @@ namespace Spider
             if (File.Exists(this.filePath))
             {
                 Serialization.Serialization<Class.Save> s = new Serialization.Serialization<Class.Save>();
-                saveInstance = s.Read(this.filePath, Serialization.Serialization<Class.Save>.Typ.Normal) as Class.Save;
-                if (saveInstance.Background == string.Empty)
-                    txtBackground.Text = "Standart";
+                this.saveInstance = s.Read(this.filePath, Serialization.Serialization<Class.Save>.Typ.Normal) as Class.Save;
+                if (string.IsNullOrWhiteSpace(saveInstance.Background))
+                    txtBackground.Text = "Standard";
                 else
                     txtBackground.Text = saveInstance.Background;
+
+                this.refresh(false);
             }
             else
-                txtBackground.Text = "Standart";
+                txtBackground.Text = "Standard";
             if (saveInstance == null)
                 saveInstance = new Class.Save();
+        }
+
+        private void refresh(bool save = false)
+        {
+            this.pnlFont.BackColor = this.saveInstance.FontColor;
+            this.pnlNotActive.BackColor = this.saveInstance.ActiveCardsColor;
+            this.pnlSelect.BackColor = this.saveInstance.SelectColor;
+            this.pnlTip.BackColor = this.saveInstance.TipColor;
+
+            if (save)
+                this.Save();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -73,6 +86,54 @@ namespace Spider
                 MessageBox.Show("Leider ist der folgende Fehler aufgetreten: " + es.Message);
             }
             
+        }
+
+        private void lnkSelect_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            using (ColorDialog cld = new ColorDialog())
+            {
+                if (cld.ShowDialog(this) == DialogResult.OK)
+                {
+                    this.saveInstance.SelectColor = cld.Color;
+                    this.refresh(true);
+                }
+            }
+        }
+
+        private void lnkNotActive_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            using (ColorDialog cld = new ColorDialog())
+            {
+                if (cld.ShowDialog(this) == DialogResult.OK)
+                {
+                    this.saveInstance.ActiveCardsColor = cld.Color;
+                    this.refresh(true);
+                }
+            }
+        }
+
+        private void lnkTip_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            using (ColorDialog cld = new ColorDialog())
+            {
+                if (cld.ShowDialog(this) == DialogResult.OK)
+                {
+                    this.saveInstance.TipColor = cld.Color;
+                    this.refresh(true);
+                }
+            }
+        }
+
+        private void lnkFont_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            using (ColorDialog cld = new ColorDialog())
+            {
+                if (cld.ShowDialog(this) == DialogResult.OK)
+                {
+                    this.saveInstance.FontColor = cld.Color;
+                    this.refresh(true);
+                }
+            }
         }
     }
 }

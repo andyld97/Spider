@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Spider.Class
 {
+    [Serializable]
     public class ExtendendList<T> : List<T>
     {
         public ExtendendList()

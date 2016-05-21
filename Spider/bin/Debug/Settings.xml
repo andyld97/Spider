@@ -6,4 +6,8 @@
   <Distance>30</Distance>
   <Distance2>20</Distance2>
   <Background />
+  <SelectColor Web="Black" />
+  <ActiveCardsColor Web="Red" />
+  <TipColor Web="Blue" />
+  <FontColor Web="White" />
 </Save>

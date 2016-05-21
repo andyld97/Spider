@@ -7,6 +7,7 @@ using System.Drawing;
 
 namespace Spider.Class
 {
+    [Serializable]
     public class Cart
     {
         public cType ccType = cType.Default;
@@ -14,12 +15,15 @@ namespace Spider.Class
         public bool Active;
         public bool Selection;
         public bool IsTipp;
-        public Structure owner;
+        //public Structure owner;
 
         public Cart(cType ccType)
         {
             this.ccType = ccType;
         }
+
+        public Cart()
+        { }
 
         public enum cType
         {
