@@ -17,11 +17,22 @@ namespace Spider.Class
         private int _newCards = 5;
         private bool endOfGame;
 
+        public Mode GameMode;
+        public SpecialCard[] WinningCards = new SpecialCard[8];
+        public int WCounter = 0;
+
         public delegate void reDraw();
         public event reDraw ReDraw;
 
         public delegate void refresh();
         public event refresh Refresh;
+
+        public enum Mode
+        {
+            OneSuit,
+            TwoSuits,
+            FourSuits,
+        }
 
         public int NewCards
         {
@@ -51,11 +62,12 @@ namespace Spider.Class
             
         }
 
-        public Game(frmMain owner)
-        {
-            this.MStructures = Class.Structure.CreateStructureList(this);
+        public Game(frmMain owner, Mode GameMode)
+        {            
             this.endOfGame = false;
             this.NewCards = 5;
+            this.GameMode = GameMode;
+            this.MStructures = Class.Structure.CreateStructureList(this);
         }
 
         private void throwEvent()
@@ -91,8 +103,16 @@ namespace Spider.Class
                 Class.ExtendendList<Class.Cart> toRemove = new Class.ExtendendList<Class.Cart>();
                 for (int i = infoR.CurrentStructure.lstCards.IndexOf(infoR.SelectedCart); i <= infoR.CurrentStructure.lstCards.Count - 1; i++)
                     toRemove.Add(infoR.CurrentStructure.lstCards[i]);
+
+                // 0 ... 1 it doesn't matter 
+                Cart.GameMode currentMode = toRemove[0].GameMode_;
+
                 foreach (Class.Cart toRem in toRemove)
                     infoR.CurrentStructure.lstCards.Remove(toRem);
+                this.ReDraw();
+
+                // Add a structure wird currentMode to the array.
+                this.WinningCards[WCounter++] = new SpecialCard(currentMode);
                 this.ReDraw();
 
                 foreach (Class.Structure s in this.MStructures)

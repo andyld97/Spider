@@ -196,7 +196,25 @@ namespace Spider.Class
                     if (Structure.CompareLists(mainList, compare))
                     {
                         toRetrun.CurrentStructure = curStr;
-                        toRetrun.OK = true;
+                        Cart.GameMode currentState = Cart.GameMode.Black;
+
+                        for (int k = 0; k <= compare.Count - 1; k++)
+                        {
+                            if (k == 0)
+                                currentState = compare[k].GameMode_;
+                            else
+                            {
+                                if (currentState != compare[k].GameMode_)
+                                {
+                                    toRetrun.OK = false;
+                                    break;
+                                }
+                                else
+                                    toRetrun.OK = true;
+
+                            }
+                        }
+                        
                         if (compare.Count > 0)
                             toRetrun.SelectedCart = compare[0];
                         return toRetrun; // We don't go on in the loop, we want to leave here and break leaves only one loop, but there are another, so it is easier.
@@ -229,7 +247,7 @@ namespace Spider.Class
 
         public static ExtendendList<Structure> CreateStructureList(Game currentGame)
         {
-            ExtendendList<Cart> mCarts = Class.Cart.CreateNewCarts();
+            ExtendendList<Cart> mCarts = Class.Cart.CreateNewCarts(currentGame.GameMode);
             ExtendendList<Structure> mStructures = new ExtendendList<Class.Structure>();
             ExtendendList<Class.Cart> tmpLst = new ExtendendList<Class.Cart>();
             int index = 0, ct = 0;
@@ -292,34 +310,51 @@ namespace Spider.Class
                         proove.Add(active[j]);
 
                     okay = Structure.CanMoveCards(proove);
+                    if (proove.Count != 1 && okay)
+                    {
+                        // If you try to switch more than one card, all cards have to be the same color.
+                        Cart.GameMode currentMode = Cart.GameMode.Black;
+                        bool ok = false;
+                        for (int y = 0; y <= proove.Count - 1; y++)
+                        {
+                            if (y == 0)
+                                currentMode = proove[y].GameMode_;
+                            else
+                            {
+                                if (currentMode != proove[y].GameMode_)
+                                {
+                                    ok = false;
+                                    break;
+                                }
+                            }
+                        }
+                        okay = ok;
+                    }
                     if (okay)
                     {
-                        if (okay)
+                        // At first, we have have to check out, whether the structure fits to the last cart from another structure!
+                        bool goOn = false;
+                        foreach (Structure d1 in lst)
                         {
-                            // At first, we have have to check out, whether the structure fits to the last cart from another structure!
-                            bool goOn = false;
-                            foreach (Structure d1 in lst)
+                            if (d1.lstCards.Count == 0)
+                                goOn = true;
+                            else
                             {
-                                if (d1.lstCards.Count == 0)
-                                    goOn = true;
-                                else
-                                {
-                                    testLst.Clear();
-                                    testLst.Add(d1.lstCards[d1.lstCards.Count - 1]);
-                                    testLst.AddRange(proove);
-                                    goOn = Structure.CanMoveCards(testLst);
-                                    if (goOn)
-                                    {
-                                        foreach (Cart cs1 in testLst)
-                                            cs1.IsTipp = true;
-                                    }
-                                }
+                                testLst.Clear();
+                                testLst.Add(d1.lstCards[d1.lstCards.Count - 1]);
+                                testLst.AddRange(proove);
+                                goOn = Structure.CanMoveCards(testLst);
                                 if (goOn)
                                 {
-                                    if (testLst.Count != 0)
-                                        foreach (Cart cs1 in proove)
-                                            cs1.IsTipp = true;
+                                    foreach (Cart cs1 in testLst)
+                                        cs1.IsTipp = true;
                                 }
+                            }
+                            if (goOn)
+                            {
+                                if (testLst.Count != 0)
+                                    foreach (Cart cs1 in proove)
+                                        cs1.IsTipp = true;
                             }
                         }
                     }

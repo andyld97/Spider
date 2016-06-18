@@ -30,11 +30,12 @@
         {
             this.mStrip = new System.Windows.Forms.MenuStrip();
             this.spielToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.spielToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.neuesSpielToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.speicherStrgSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.einstellungenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.spielLadenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.spielToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.einstellungenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.beendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.neueKartenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tippToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mStrip.SuspendLayout();
@@ -47,7 +48,7 @@
             this.spielToolStripMenuItem1});
             this.mStrip.Location = new System.Drawing.Point(0, 0);
             this.mStrip.Name = "mStrip";
-            this.mStrip.Size = new System.Drawing.Size(1283, 24);
+            this.mStrip.Size = new System.Drawing.Size(1351, 24);
             this.mStrip.TabIndex = 3;
             // 
             // spielToolStripMenuItem
@@ -56,16 +57,26 @@
             this.neuesSpielToolStripMenuItem,
             this.speicherStrgSToolStripMenuItem,
             this.spielLadenToolStripMenuItem,
-            this.einstellungenToolStripMenuItem});
+            this.einstellungenToolStripMenuItem,
+            this.beendenToolStripMenuItem});
             this.spielToolStripMenuItem.Name = "spielToolStripMenuItem";
             this.spielToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
             this.spielToolStripMenuItem.Text = "Spider";
+            // 
+            // spielToolStripMenuItem1
+            // 
+            this.spielToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.neueKartenToolStripMenuItem,
+            this.tippToolStripMenuItem});
+            this.spielToolStripMenuItem1.Name = "spielToolStripMenuItem1";
+            this.spielToolStripMenuItem1.Size = new System.Drawing.Size(44, 20);
+            this.spielToolStripMenuItem1.Text = "Spiel";
             // 
             // neuesSpielToolStripMenuItem
             // 
             this.neuesSpielToolStripMenuItem.Image = global::Spider.Properties.Resources.Add;
             this.neuesSpielToolStripMenuItem.Name = "neuesSpielToolStripMenuItem";
-            this.neuesSpielToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.neuesSpielToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.neuesSpielToolStripMenuItem.Text = "Neues Spiel";
             this.neuesSpielToolStripMenuItem.Click += new System.EventHandler(this.neuesSpielToolStripMenuItem_Click);
             // 
@@ -77,14 +88,6 @@
             this.speicherStrgSToolStripMenuItem.Text = "Speichern   (Strg+S)";
             this.speicherStrgSToolStripMenuItem.Click += new System.EventHandler(this.speicherStrgSToolStripMenuItem_Click);
             // 
-            // einstellungenToolStripMenuItem
-            // 
-            this.einstellungenToolStripMenuItem.Image = global::Spider.Properties.Resources.Settings;
-            this.einstellungenToolStripMenuItem.Name = "einstellungenToolStripMenuItem";
-            this.einstellungenToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.einstellungenToolStripMenuItem.Text = "Einstellungen";
-            this.einstellungenToolStripMenuItem.Click += new System.EventHandler(this.einstellungenToolStripMenuItem_Click);
-            // 
             // spielLadenToolStripMenuItem
             // 
             this.spielLadenToolStripMenuItem.Image = global::Spider.Properties.Resources.Open;
@@ -93,14 +96,21 @@
             this.spielLadenToolStripMenuItem.Text = "Spiel laden (Strg+O)";
             this.spielLadenToolStripMenuItem.Click += new System.EventHandler(this.spielLadenToolStripMenuItem_Click);
             // 
-            // spielToolStripMenuItem1
+            // einstellungenToolStripMenuItem
             // 
-            this.spielToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.neueKartenToolStripMenuItem,
-            this.tippToolStripMenuItem});
-            this.spielToolStripMenuItem1.Name = "spielToolStripMenuItem1";
-            this.spielToolStripMenuItem1.Size = new System.Drawing.Size(44, 20);
-            this.spielToolStripMenuItem1.Text = "Spiel";
+            this.einstellungenToolStripMenuItem.Image = global::Spider.Properties.Resources.Settings;
+            this.einstellungenToolStripMenuItem.Name = "einstellungenToolStripMenuItem";
+            this.einstellungenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.einstellungenToolStripMenuItem.Text = "Einstellungen";
+            this.einstellungenToolStripMenuItem.Click += new System.EventHandler(this.einstellungenToolStripMenuItem_Click);
+            // 
+            // beendenToolStripMenuItem
+            // 
+            this.beendenToolStripMenuItem.Image = global::Spider.Properties.Resources.CloseIcon;
+            this.beendenToolStripMenuItem.Name = "beendenToolStripMenuItem";
+            this.beendenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.beendenToolStripMenuItem.Text = "Beenden";
+            this.beendenToolStripMenuItem.Click += new System.EventHandler(this.beendenToolStripMenuItem_Click);
             // 
             // neueKartenToolStripMenuItem
             // 
@@ -123,8 +133,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.BackgroundImage = global::Spider.Properties.Resources.Wood;
-            this.ClientSize = new System.Drawing.Size(1283, 427);
+            this.ClientSize = new System.Drawing.Size(1351, 427);
             this.Controls.Add(this.mStrip);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -151,6 +160,7 @@
         private System.Windows.Forms.ToolStripMenuItem einstellungenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem speicherStrgSToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem spielLadenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem beendenToolStripMenuItem;
     }
 }
 

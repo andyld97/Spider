@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Save xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<Save xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Y>15</Y>
-  <Width>81</Width>
-  <Height>109</Height>
+  <Width>83</Width>
+  <Height>120</Height>
   <Distance>30</Distance>
-  <Distance2>20</Distance2>
+  <Distance2>15</Distance2>
   <Background />
-  <SelectColor Web="Black" />
-  <ActiveCardsColor Web="Red" />
-  <TipColor Web="Blue" />
+  <SelectColor Web="Aqua" />
+  <ActiveCardsColor Web="Black" />
+  <TipColor Web="Red" />
   <FontColor Web="White" />
+  <HW_ACC>false</HW_ACC>
 </Save>

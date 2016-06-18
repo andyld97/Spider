@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Spider.Class.Cart">
+    <Position X="19" Y="0.75" Width="2" />
+    <NestedTypes>
+      <Enum Name="Spider.Class.Cart.GameMode" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Class\Cart.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="Spider.Class.Cart.cType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Class\Cart.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>ACABAICAgQAAAAAAAAAAQAAAAAAAAAAgCgAAAAAAUAQ=</HashCode>
+      <FileName>Class\Cart.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Spider.Class.ExtendendList&lt;T&gt;">
+    <Position X="26" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Class\ExtendendList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Spider.Class.Game">
+    <Position X="23.75" Y="0.75" Width="2" />
+    <NestedTypes>
+      <Delegate Name="Spider.Class.Game.reDraw" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Class\Game.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Delegate Name="Spider.Class.Game.refresh" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Class\Game.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Enum Name="Spider.Class.Game.Mode" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Class\Game.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAgBAAAAYAEAAAABAAABAAAQAAgJIABACAAA=</HashCode>
+      <FileName>Class\Game.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Spider.Class.Save">
+    <Position X="18" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAIAABAAAAAAAAAAAAEAIAIAAAABAAAAgIAAAIAA=</HashCode>
+      <FileName>Class\Save.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Spider.Class.Structure">
+    <Position X="21.25" Y="0.75" Width="2.25" />
+    <NestedTypes>
+      <Enum Name="Spider.Class.Structure.SType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Class\Structure.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Struct Name="Spider.Class.Structure.Info" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Class\Structure.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+      <Struct Name="Spider.Class.Structure.Tipp" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Class\Structure.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AgAABEAAAAIEABAAgAEAAAABAIAAAAAYAQCAAAAAACQ=</HashCode>
+      <FileName>Class\Structure.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Spider.Class.XmlColor">
+    <Position X="15.5" Y="5.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAACAAAAQAAAACAAAAAEAAAAABCAAAAAAAAAAAA=</HashCode>
+      <FileName>Class\XmlColor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Spider.Class.Render.GDIRenderer">
+    <Position X="0.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Class\Render\GDIRenderer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Spider.Class.Render.Renderer">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <NestedTypes>
+      <Delegate Name="Spider.Class.Render.Renderer.onMouseDown" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Class\Render\Renderer.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AACBAAEAAAAggAAAAABAAAAAQAAAEAQIYAAAAgAAAAA=</HashCode>
+      <FileName>Class\Render\Renderer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Spider.Class.Render.SlimDXRenderer">
+    <Position X="2.25" Y="5.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AABBAAgAABghAABAQAAAAAAAYAAAAAQCAAAAAgAQAAA=</HashCode>
+      <FileName>Class\Render\SlimDXRenderer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Spider.Class.Render.Graphics.DirectGraphics">
+    <Position X="5.75" Y="5.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AFAAAAATABIoIAAACABAgAAAoCAEAoDJikDAAABBAAA=</HashCode>
+      <FileName>Class\Render\Graphics\DirectGraphics.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Spider.Class.Render.Graphics.Graphics">
+    <Position X="12.5" Y="5.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AFAAAAATABIoIAAACABAgAAAgCAAAoDJCEDAAAABAAA=</HashCode>
+      <FileName>Class\Render\Graphics\Graphics.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="Spider.Class.Render.Graphics.IGraphics">
+    <Position X="9" Y="5.25" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AFAAAAATABIIIAAACABAgAAAgCAAAoDJCEDAAAABAAA=</HashCode>
+      <FileName>Class\Render\Graphics\IGraphics.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

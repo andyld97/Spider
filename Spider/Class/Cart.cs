@@ -11,19 +11,27 @@ namespace Spider.Class
     public class Cart
     {
         public cType ccType = cType.Default;
+        public GameMode GameMode_ = GameMode.Black;
         public static Random rand = new Random();
         public bool Active;
         public bool Selection;
         public bool IsTipp;
         //public Structure owner;
 
-        public Cart(cType ccType)
+        public Cart(cType ccType, GameMode gMode)
         {
             this.ccType = ccType;
+            this.GameMode_ = gMode;
         }
 
         public Cart()
         { }
+
+        public enum GameMode
+        {
+            Red,
+            Black
+        }
 
         public enum cType
         {
@@ -55,34 +63,40 @@ namespace Spider.Class
             return Structure.Abs(cTmp.IndexOf(one) - cTmp.IndexOf(two));
         }
 
-        public Image ToImage()
+        public virtual Image ToImage()
         {
-            switch (this.ccType)
+            try
             {
-                case cType.Default: return null; break;
-                case cType.One: return Properties.Resources._1; break;
-                case cType.Two: return Properties.Resources._2; break;
-                case cType.Three: return Properties.Resources._3; break;
-                case cType.Four: return Properties.Resources._4; break;
-                case cType.Five: return Properties.Resources._5; break;
-                case cType.Six: return Properties.Resources._6; break;
-                case cType.Seven: return Properties.Resources._7; break;
-                case cType.Eight: return Properties.Resources._8; break;
-                case cType.Nine: return Properties.Resources._9; break;
-                case cType.Ten: return Properties.Resources._10; break;
-                case cType.K: return Properties.Resources.K; break;
-                case cType.Q: return Properties.Resources.Q; break;
-                case cType.J: return Properties.Resources.J; break;
+                return Image.FromFile(System.IO.Path.Combine(new string[] { Application.StartupPath, "Images", this.GameMode_.ToString(), this.ccType.ToString() + ".png" }));
+                //return Image.FromFile(System.IO.Path.Combine(new string[] { Application.StartupPath, "Images", "Red", this.ccType.ToString() + ".png" }));
             }
-            return null;
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
-        public static ExtendendList<Cart> CreateNewCarts()
+        public static ExtendendList<Cart> CreateNewCarts(Game.Mode gameMode)
         {
             ExtendendList<Class.Cart> lstCarts = new ExtendendList<Class.Cart>();
-            for (int i = 0; i <= 7; i++)
-                for (int y = 1; y <= 13; y++)
-                    lstCarts.Add(new Class.Cart((Class.Cart.cType)y));
+            if (gameMode == Game.Mode.OneSuit)
+            {
+                for (int i = 0; i <= 7; i++)
+                    for (int y = 1; y <= 13; y++)
+                        lstCarts.Add(new Class.Cart((Class.Cart.cType)y, GameMode.Black));
+            }
+            else
+            {
+                for (int i = 0; i <= 7; i++)
+                {
+                    bool addFlag = false;
+                    for (int y = 1; y <= 13; y++)
+                    {
+                        lstCarts.Add(new Class.Cart((Class.Cart.cType)y, (addFlag ? GameMode.Black : GameMode.Red)));
+                        addFlag = !addFlag;
+                    }
+                }
+            }
             // List is filled now.
             Cart.Shuffle<Cart>(lstCarts);
             return lstCarts;
@@ -119,11 +133,28 @@ namespace Spider.Class
             for (int s = 0; s <= lst.Count - 1; s++)
             {
                 if (s + 1 > lst.Count - 1)
+                {
+                    // Check if all cards are the same color, otherwise it isn't possible to move.
+                    GameMode mdr = GameMode.Black;
+                    for (int y = 0; y <= lst.Count - 1; y++)
+                    {
+                        if (y == 0)
+                            mdr = lst[y].GameMode_;
+                        else
+                        {
+                            if (mdr != lst[y].GameMode_)
+                                return false;
+                        }
+                    }
+
                     return true;
+
+                }
                 diff = Cart.CalculateDifference(lst[s].ccType, lst[s + 1].ccType);
                 if (Structure.Abs(diff) != 1)
                     return false;
             }
+
             return false;           
         }
 

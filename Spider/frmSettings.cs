@@ -15,6 +15,7 @@ namespace Spider
         private string filePath = Path.Combine(Application.StartupPath, "Settings.xml");
         private Class.Save saveInstance = null;
         private frmMain owner = null;
+        private bool dontAct = false;
 
         public frmSettings(frmMain owner)
         {
@@ -47,6 +48,10 @@ namespace Spider
             this.pnlNotActive.BackColor = this.saveInstance.ActiveCardsColor;
             this.pnlSelect.BackColor = this.saveInstance.SelectColor;
             this.pnlTip.BackColor = this.saveInstance.TipColor;
+            this.dontAct = true;
+            this.chkHWK.Checked = this.saveInstance.HW_ACC;
+            this.dontAct = false;
+            this.lblHWInfo.Text = (this.saveInstance.HW_ACC ? "SlimDX" : "GDI+");
 
             if (save)
                 this.Save();
@@ -134,6 +139,14 @@ namespace Spider
                     this.refresh(true);
                 }
             }
+        }
+
+        private void chkHWK_CheckedChanged(object sender, EventArgs e)
+        {
+            this.saveInstance.HW_ACC = (sender as CheckBox).Checked;
+            this.lblHWInfo.Text = (this.saveInstance.HW_ACC ? "SlimDX" : "GDI+");
+            if (!this.dontAct)
+                this.Save();
         }
     }
 }

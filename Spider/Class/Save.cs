@@ -27,5 +27,7 @@ namespace Spider.Class
 
         [XmlElement(Type = typeof(XmlColor))]
         public System.Drawing.Color FontColor = System.Drawing.Color.White;
+
+        public bool HW_ACC = false;
     }
 }

@@ -13,7 +13,7 @@
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -38,6 +38,10 @@
     <Reference Include="Serialization">
       <HintPath>..\..\..\Eigene Dateien\Desktop\UserInterface Projekt\UserInterface\UserInterface\bin\Debug\Serialization.dll</HintPath>
     </Reference>
+    <Reference Include="SlimDX, Version=4.0.13.43, Culture=neutral, PublicKeyToken=b1b0c32fd1ffe4f9, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Eigene Librays\UserInterface\UserInterface\bin\Debug\SlimDX.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -53,7 +57,20 @@
     <Compile Include="Class\Cart.cs" />
     <Compile Include="Class\ExtendendList.cs" />
     <Compile Include="Class\Game.cs" />
+    <Compile Include="Class\Render\GDIRenderer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Class\Render\Graphics\DirectGraphics.cs" />
+    <Compile Include="Class\Render\Graphics\Graphics.cs" />
+    <Compile Include="Class\Render\Graphics\IGraphics.cs" />
+    <Compile Include="Class\Render\Renderer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Class\Render\SlimDXRenderer.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Class\Save.cs" />
+    <Compile Include="Class\SpeicalCard.cs" />
     <Compile Include="Class\Structure.cs" />
     <Compile Include="Class\XmlColor.cs" />
     <Compile Include="frmMain.cs">
@@ -68,6 +85,9 @@
     <Compile Include="frmSettings.Designer.cs">
       <DependentUpon>frmSettings.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModeDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmMain.resx">
@@ -75,6 +95,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmSettings.resx">
       <DependentUpon>frmSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModeDialog.resx">
+      <DependentUpon>ModeDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -86,6 +109,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Project.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -152,6 +176,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="1.ico" />
+    <None Include="bin\Debug\Images\Red\One.png" />
+    <None Include="bin\Debug\Images\Black\One.png" />
+    <None Include="Resources\CloseIcon.png" />
     <None Include="Resources\Open.png" />
     <None Include="Resources\Save.png" />
   </ItemGroup>

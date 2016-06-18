@@ -14,76 +14,29 @@ namespace Spider
     {
         private Class.Structure oldOne;
         private Class.Game currentGame = null;
+        private Spider.Class.Render.Renderer currentRenderer;
 
         private frmSettings instance = null;
         private string filePath = Path.Combine(Application.StartupPath, "Settings.xml");
-        private Class.Save info = null;
-    
+        private Class.Save info = null;    
 
         public frmMain()
         {
             InitializeComponent();
-            this.currentGame = new Class.Game(this);
             this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.ResizeRedraw | ControlStyles.OptimizedDoubleBuffer, true);
             this.UpdateStyles();
             this.ReadSettings();
-        }
 
-        public void ReadSettings()
-        {
-            if (File.Exists(this.filePath))
-            {
-                Serialization.Serialization<Class.Save> s = new Serialization.Serialization<Class.Save>();
-                this.info = s.Read(this.filePath, Serialization.Serialization<Class.Save>.Typ.Normal);
-                try
-                {
-                    if (this.info.Background != string.Empty)
-                        this.BackgroundImage = Image.FromFile(this.info.Background);
-                    else
-                        this.BackgroundImage = Properties.Resources.Wood;
-                    this.Invalidate();
-                }
-                catch 
-                { }
-            }
+            if (this.info.HW_ACC)
+                this.currentRenderer = new Spider.Class.Render.SlimDXRenderer();
             else
-                this.info = new Class.Save();
-            Class.Structure.test = this.info;
+                this.currentRenderer = new Spider.Class.Render.GDIRenderer();
+
+            this.currentRenderer.MouseDown += CurrentRenderer_MouseDown;
         }
 
-        private void frmMain_Load(object sender, EventArgs e)
+        private void CurrentRenderer_MouseDown(MouseEventArgs e)
         {
-            this.currentGame.ReDraw += CurrentGame_ReDraw;
-            this.currentGame.Refresh += CurrentGame_Refresh;
-            this.Invalidate();
-
-            this.mStrip.BackColor = Color.FromArgb(200, 230, 100, 70);
-            this.mStrip.ForeColor = Color.Black;
-            
-        }
-
-        private void CurrentGame_Refresh()
-        {
-            this.neueKartenToolStripMenuItem.Text = (this.currentGame.NewCards == 0 ? "Neue Karten (Sie haben keine Stapel mehr)" : String.Format("Neue Karten (Sie haben noch {0} Stapel)", this.currentGame.NewCards));
-        }
-
-        protected override void OnKeyDown(KeyEventArgs e)
-        {
-            base.OnKeyDown(e);
-            if (e.KeyCode == Keys.F2)
-                this.currentGame.ContributeNewCars();
-            else if (e.KeyCode == Keys.F3)
-                this.showHelp();
-            else if (e.Control && e.KeyCode == Keys.S)
-                speicherStrgSToolStripMenuItem_Click(this, new EventArgs());
-            else if (e.Control && e.KeyCode == Keys.O)
-                spielLadenToolStripMenuItem_Click(this, new EventArgs());
-        }
-
-
-        protected override void OnMouseDown(MouseEventArgs e)
-        {
-            base.OnMouseDown(e);
             Class.Structure.Info strM = Class.Structure.FindByLocation(this.currentGame.MStructures, e.Location);
             if (strM.CurrentStructure != null)
             {
@@ -135,7 +88,7 @@ namespace Spider
                         this.Invalidate();
                         return;
                     }
-                    oldOne = null;  
+                    oldOne = null;
                     Class.ExtendendList<Class.Cart> tmp = new Class.ExtendendList<Class.Cart>();
                     foreach (Class.Cart cC in oldStructure.lstCards)
                     {
@@ -192,80 +145,115 @@ namespace Spider
 
                     this.currentGame.CheckForWin();
                     this.Invalidate();
-          
+
                 }
-            }           
+            }
         }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            base.OnClosing(e);
+            this.currentRenderer.OnDestroy();
+        }
+
+        public void ReadSettings()
+        {
+            if (File.Exists(this.filePath))
+            {
+                Serialization.Serialization<Class.Save> s = new Serialization.Serialization<Class.Save>();
+                this.info = s.Read(this.filePath, Serialization.Serialization<Class.Save>.Typ.Normal);
+                try
+                {
+                    if (this.info.Background != string.Empty)
+                        this.currentRenderer.BackgroundImage = Image.FromFile(this.info.Background);
+                    else
+                        this.currentRenderer.BackgroundImage = Image.FromFile(System.IO.Path.Combine(Application.StartupPath, "Images", "Image.jpg"));
+                    this.currentRenderer.OnDraw();
+                }
+                catch 
+                { }
+            }
+            else
+                this.info = new Class.Save();
+            Class.Structure.test = this.info;
+        }
+
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+            using (ModeDialog mld = new ModeDialog())
+            {
+                if (mld.ShowDialog(this) == DialogResult.OK)
+                {
+                    this.currentGame = new Class.Game(this, mld.SelectedMode);
+                }
+            }
+            currentRenderer.OnInit(this.currentGame, this, this.info);
+            this.currentGame.ReDraw += CurrentGame_ReDraw;
+            this.currentGame.Refresh += CurrentGame_Refresh;
+
+            this.mStrip.BackColor = Color.LightSkyBlue;
+            this.mStrip.ForeColor = Color.Black;
+        }
+
+        private void CurrentGame_Refresh()
+        {
+            this.neueKartenToolStripMenuItem.Text = (this.currentGame.NewCards == 0 ? "Neue Karten (Sie haben keine Stapel mehr)" : String.Format("Neue Karten (Sie haben noch {0} Stapel)", this.currentGame.NewCards));
+        }
+
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            base.OnKeyDown(e);
+            if (e.KeyCode == Keys.F2)
+                this.currentGame.ContributeNewCars();
+            else if (e.KeyCode == Keys.F3)
+                this.showHelp();
+            else if (e.Control && e.KeyCode == Keys.S)
+                speicherStrgSToolStripMenuItem_Click(this, new EventArgs());
+            else if (e.Control && e.KeyCode == Keys.O)
+                spielLadenToolStripMenuItem_Click(this, new EventArgs());
+        }
+
 
         private void showHelp()
         {
             Class.Structure.ShowsAllTipps(this.currentGame.MStructures);
-            this.Invalidate();
-        }
-
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            base.OnPaint(e);
-           // e.Graphics.FillRectangle(new SolidBrush(Color.Green), this.DisplayRectangle);
-            StringFormat alginment = new StringFormat() { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Near };
-            int i = 0, c = 0;
-            foreach (Class.Structure mStr in this.currentGame.MStructures)
-            {
-                c = 0;
-                int cCard = 0;
-
-                if (mStr.lstCards.Count == 0)
-                {
-                    // Empty field
-                    e.Graphics.DrawRectangle(new Pen(Color.Violet), new Rectangle(i * (this.info.Distance + this.info.Width), this.info.Y + 10, 100, 150));
-                    i++; // Because \/ there will be continued!!!!
-                    continue;
-                }
-
-                foreach (Class.Cart mCart in mStr.lstCards)
-                {
-                    int x = i * (this.info.Width + this.info.Distance);
-                    int y = this.info.Y + 10 + (c * 10);
-                    if (!mCart.Active)
-                        e.Graphics.FillRectangle(new SolidBrush(this.info.ActiveCardsColor), new Rectangle(x, y, this.info.Width, 5));
-                    else
-                    {
-                        Rectangle actCard;
-                        if (mStr.lstCards.IndexOf(mCart) == mStr.lstCards.Count - 1)
-                            actCard = new Rectangle(i * (this.info.Width + this.info.Distance), y + (cCard * this.info.Distance2), this.info.Width, this.info.Height);
-                        else
-                            actCard = new Rectangle(i * (this.info.Width + this.info.Distance), y + (cCard * this.info.Distance2), this.info.Width, this.info.Distance2 * 2);
-
-                        e.Graphics.DrawImageUnscaledAndClipped(mCart.ToImage(), actCard);
-
-                        if (mCart.Selection)
-                            e.Graphics.DrawRectangle(new Pen(this.info.SelectColor, 3), actCard);
-                        int fact = 3;
-                        if (mCart.IsTipp)
-                            e.Graphics.DrawRectangle(new Pen(this.info.TipColor, 1), new Rectangle(actCard.X + fact, actCard.Y + fact, actCard.Width - fact * 2, actCard.Height - fact * 2));
-                        cCard++;
-                    }
-                    c++;
-                }
-                i++;
-            }
-            if (this.currentGame.EndOfGame)
-                e.Graphics.DrawString("Sie haben gewonnen!", new Font("Segoe UI", 36, FontStyle.Regular), new SolidBrush(this.info.FontColor), this.DisplayRectangle, new StringFormat() { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
+            this.currentRenderer.OnDraw();
         }
 
         private void neuesSpielToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show(this, "Sind Sie sich sicher, dass Sie das aktuelle Spiel abbrechen und ein neues Spiel starten möchten?", "Neues Spiel?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
             {
-                this.currentGame = new Class.Game(this);
+                Spider.Class.Game.Mode currentMode = Class.Game.Mode.OneSuit;
+
+                using (ModeDialog mld = new ModeDialog())
+                {
+                    if (mld.ShowDialog(this) == DialogResult.OK)
+                    {
+                        currentMode = mld.SelectedMode;
+                    }
+                }
+                this.currentGame.MStructures.Clear();
+                this.currentGame.OtherCards.Clear();
+                this.Controls.Remove(this.currentRenderer);
+                this.currentGame = new Class.Game(this, currentMode);
+                this.currentGame.Refresh += CurrentGame_Refresh;                
                 this.currentGame.ReDraw += CurrentGame_ReDraw;
-                this.Invalidate();
+                this.currentRenderer.OnDraw();
+
+                if (this.info.HW_ACC)
+                    this.currentRenderer = new Spider.Class.Render.SlimDXRenderer();
+                else
+                    this.currentRenderer = new Spider.Class.Render.GDIRenderer();
+                this.currentRenderer.MouseDown += CurrentRenderer_MouseDown;
+                currentRenderer.OnInit(this.currentGame, this, this.info);
+                currentRenderer.OnDraw();
             }
         }
 
         private void CurrentGame_ReDraw()
         {
-            this.Invalidate();
+            this.currentRenderer.OnDraw();
         }
 
         private void tippToolStripMenuItem_Click(object sender, EventArgs e)
@@ -309,11 +297,22 @@ namespace Spider
                     try
                     {
                         Serialization.Serialization<Class.Game> gameSer = new Serialization.Serialization<Class.Game>();
-                        this.currentGame = new Class.Game(this);
+                        this.currentGame.MStructures.Clear();
+                        this.currentGame.OtherCards.Clear();
+                        this.Controls.Remove(this.currentRenderer);
                         this.currentGame = gameSer.Read(ofd.FileName, Serialization.Serialization<Class.Game>.Typ.Normal);
                         this.currentGame.ReDraw += CurrentGame_ReDraw;
                         this.currentGame.Refresh += CurrentGame_Refresh;
                         this.Invalidate();
+
+                        if (this.info.HW_ACC)
+                            this.currentRenderer = new Spider.Class.Render.SlimDXRenderer();
+                        else
+                            this.currentRenderer = new Spider.Class.Render.GDIRenderer();
+                        this.currentRenderer.MouseDown += CurrentRenderer_MouseDown;
+                        currentRenderer.OnInit(this.currentGame, this, this.info);
+                        currentRenderer.OnDraw();
+                        this.currentRenderer.OnDraw();
                     }
                     catch (Exception)
                     {
@@ -321,6 +320,11 @@ namespace Spider
                     }
                 }
             }
+        }
+
+        private void beendenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

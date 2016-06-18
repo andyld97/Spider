@@ -17,3 +17,7 @@ E:\Spider\Spider\bin\Debug\Spider.pdb
 F:\Andy's Dokumente\Spider\Spider\bin\Debug\Serialization.dll
 F:\Andy's Dokumente\Spider\Spider\bin\Debug\Serialization.pdb
 F:\Andy's Dokumente\Spider\Spider\obj\Debug\Spider.frmSettings.resources
+F:\Andy's Dokumente\Spider\Spider\bin\Debug\SlimDX.dll
+F:\Andy's Dokumente\Spider\Spider\bin\Debug\SlimDX.pdb
+F:\Andy's Dokumente\Spider\Spider\bin\Debug\SlimDX.xml
+F:\Andy's Dokumente\Spider\Spider\obj\Debug\Spider.ModeDialog.resources
