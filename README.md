@@ -8,6 +8,8 @@ see here for more details: https://www.vb-paradise.de/index.php/Thread/113439-Sp
 #### Screenshots  
 ![shot1](http://www.seite.bplaced.net/Git/Images/Spider1.png)  
 ![shot2](http://www.seite.bplaced.net/Git/Images/Spider2.png)  
+![shot3](http://www.seite.bplaced.net/Git/Images/Spider3.png)  
+![shot4](http://www.seite.bplaced.net/Git/Images/Spider4.png)  
 
 #### Features  
 - Alter colours/colors  
