@@ -6,10 +6,10 @@ I am going to translate it to english, so that you can choose your appropriate l
 see here for more details: https://www.vb-paradise.de/index.php/Thread/113439-Spider-Solit%C3%A4r/
 
 #### Screenshots  
-![shot5](http://www.seite.bplaced.net/Git/Images/1.png)  
-![shot6](http://www.seite.bplaced.net/Git/Images/2.png)  
-![shot3](http://www.seite.bplaced.net/Git/Images/3.png)  
-![shot4](http://www.seite.bplaced.net/Git/Images/4.png)  
+![shot1](https://www.code-a-software.net/git/images/1.png)  
+![shot2](https://www.code-a-software.net/git/images/2.png)  
+![shot3](https://www.code-a-software.net/git/images/3.png)  
+![shot4](https://www.code-a-software.net/git/images/4.png)  
 
 #### Features  
 - Alter colours/colors  
